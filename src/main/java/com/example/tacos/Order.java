@@ -3,11 +3,17 @@ package com.example.tacos;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import java.util.Date;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 @Data
 public class Order {
+    
+    
+    private Long id;
+    
+    private Date createdAt;
     
     @NotBlank(message="Name is required")
     private String name;

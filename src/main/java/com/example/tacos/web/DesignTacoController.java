@@ -3,12 +3,14 @@ package com.example.tacos.web;
 import com.example.tacos.Ingredient;
 import com.example.tacos.Ingredient.Type;
 import com.example.tacos.Taco;
+import jakarta.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,15 +40,19 @@ public class DesignTacoController {
                     filterByType(ingredients, type));
         }
         
-        model.addAttribute("design", new Taco());
+        model.addAttribute("taco", new Taco());
         return "design";
     }
     
     @PostMapping
-    public String processDesign(Taco design){
+    public String processDesign(@Valid Taco taco, Errors errors){
+        if(errors.hasErrors()){
+            log.info("error"+errors);
+            return "design";
+        }
         //Save the taco design..
         //We'll do this in chapter 3
-        log.info("Processing design: "+ design);
+        log.info("Processing design: "+ taco);
         return "redirect:/orders/current";
     }
 
