@@ -14,8 +14,8 @@
         
         <form method="POST" th:object="${taco}"> 
             
-            <div th:if="${#fields.hasErrors()}">
-                <span class="validationError">Please correct the problems below and resubmit</span>
+            <div th:if="${#fields.hasErrors('ingredients')}">
+                <span class="validationError">Ingredient Error</span>
             </div>
             
             <div class="grid">

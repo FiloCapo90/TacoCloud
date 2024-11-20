@@ -29,7 +29,12 @@ public class JdbcIngredientRepository implements IngredientRepository {
 
     @Override
     public Ingredient save(Ingredient ingredient) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        jdbc.update(
+                "insert into Ingredient (id,name,type) values (?,?,?)", 
+                ingredient.getId(),
+                ingredient.getName(),
+                ingredient.getType().toString());
+        return ingredient;
     }
     
     private Ingredient mapRowToIngredient(ResultSet rs, int rowNum) throws SQLException{
